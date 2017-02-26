@@ -63,3 +63,7 @@ luxafor.send(new Luxafor.Effect.Shutdown());
 ```
 
 There's not so many effects, for now. But feel free to contribute quicker and better than me :p
+
+## Contribute
+
+Any contributions are welcome, don't be shy !
