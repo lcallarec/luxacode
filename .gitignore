@@ -34,5 +34,7 @@
 
 # Project scope
 
+libfuxafor.h
+vala-libluxafor.vapi
 main.vala
 luxafor

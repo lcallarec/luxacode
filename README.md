@@ -10,7 +10,17 @@ It is written in Vala, and designed to be compiled as shared library.
 On apt based-systems :
 
 ```bash
-sudo apt-get install vala libusb-1.0-0 libusb-1.0-0-dev libusb-dev(?)
+sudo apt-get install vala libusb-1.0-0 libusb-1.0-0-dev libusb-dev
+```
+
+### Compile the shared library
+
+```bash
+valac --pkg libusb-1.0 --library=vala-libluxafor -H libluxafor.h \
+src/luxafor.vala src/device/usb_device_finder.vala src/device/luxafor_finder.vala \
+src/effect/effect.vala src/effect/color.vala src/effect/shutdown.vala \
+-X -fPIC -X -shared -o libluxafor.so
+
 ```
 
 ## Vala API
