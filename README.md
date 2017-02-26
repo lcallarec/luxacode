@@ -23,29 +23,43 @@ src/effect/effect.vala src/effect/color.vala src/effect/shutdown.vala \
 
 ```
 
+## Sandbox : main.vala && luxafor-cli
+
+`su` access is needed to make `libluxafor.so` easily reachable at runtime and allow `luxafor-cli` to access USB devices.
+(accessing USB devices is always disabled by default for 'non-root' user on every Linux distributions).
+
+```bash
+$ sudo su -
+$ valac --pkg libusb-1.0 vala-libluxafor.vapi main.vala -X libluxafor.so -X -I. -o luxafor-cli
+$ export LD_LIBRARY_PATH=. && ./luxafor-cli
+
+```
+
 ## Vala API
 
+Init LibUSB :
 ```vala
+LibUSB.Context context;
+LibUSB.Context.init(out context);	
+```
 
-Luxafor.Luxafor? luxafor;
-public static int main(string[] args)
-{
-	LibUSB.Context context;
-	LibUSB.Context.init(out context);	
-	
-	luxafor = new Luxafor.Luxafor(context);
-	if (luxafor != null) {
-		
-		luxafor.send(new Luxafor.Effect.Color(255, 0, 0, 255));
-		
-		for(int i = 0;i < 500000000;i++) {}
-
-		luxafor.send(new Luxafor.Effect.Shutdown());
-		
-	} else {
-		stderr.printf("FAILED TO CREATE LUXAFOR\n");
-	}
-	
-	return 0;
+Create Luxafor :
+```vala
+Luxafor.Luxafor? luxafor = new Luxafor.Luxafor(context);
+if (luxafor != null) {
+  //Do something...		
 }
 ```
+
+Send an effect, for exemple pure blue high-intensity color :
+```vala
+luxafor.send(new Luxafor.Effect.Color(255, 0, 0, 255));
+
+```
+
+Shutdown the Luxafor :
+```
+luxafor.send(new Luxafor.Effect.Shutdown());
+```
+
+There's not so many effects, for now. But feel free to contribute quicker and better than me :p
