@@ -31,3 +31,8 @@
 # Debug files
 *.dSYM/
 *.su
+
+# Project scope
+
+main.vala
+luxafor
