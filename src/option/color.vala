@@ -1,15 +1,13 @@
 namespace Luxafor.Cli.Option {
 	
 	private int intensity = 255;
-	private int red   = 0; 
-	private int green = 0;
-	private int blue  = 0;
+	private int red   = -1; 
+	private int green = -1;
+	private int blue  = -1;
 		
 	public class Color : Option {
 		
 		public Color(string[] args) {
-
-			base(args);
 
 			GLib.OptionEntry[] options = {
 				OptionEntry() {
@@ -59,7 +57,8 @@ namespace Luxafor.Cli.Option {
 				stderr.printf ("error: %s\n", e.message);
 				stdout.printf ("Run '%s --help' to see a full list of available command line options.\n", args[0]);
 			}
-	
+			
+			base(args);
 		}
 
 		public override string get_name() {
@@ -68,6 +67,28 @@ namespace Luxafor.Cli.Option {
 
 		public override Effect.Effect get_effect() {
 			return new Effect.Color((uint8) intensity, (uint8) red, (uint8) green, (uint8) blue);
+		}
+		
+		public override bool validate() {
+
+			if (red < 0 && green < 0 && blue < 0) {
+				stderr.printf("You must at least set one color : --red=[0-255], --green[0-255] or --blue[0-255] (-r [0-255], -g [0-255] -b [0-255]).\n");
+				return false;
+			}
+			
+			if (red < 0) {
+				red = 0;
+			}
+			
+			if (green < 0) {
+				green = 0;
+			}
+			
+			if (blue < 0) {
+				blue = 0;
+			}
+			
+			return true;
 		}
 	}
 }

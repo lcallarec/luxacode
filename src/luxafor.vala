@@ -7,9 +7,9 @@ namespace Luxafor.Cli {
 		public static int main (string[] args) {
 			
 			register_stack = new Option.RegisterStack();
-			register_stack.register(new Option.Color(args)); 
+			register_stack.register(new Option.Color(args));
 			
-			if (false == validate(args)) {
+			if (false == validate(args, register_stack)) {
 				return 2;
 			}
 			
@@ -17,7 +17,10 @@ namespace Luxafor.Cli {
 			LibUSB.Context.init(out context); 
 			Luxafor luxafor = new Luxafor(context);
 			if (luxafor.is_ready()) {
-				luxafor.send(register_stack.get_effect_for(args[1]));	
+				Effect.Effect? effect = register_stack.get_effect_for(args[1]);
+				if (effect != null) {
+					luxafor.send(effect);	
+				}
 			} else {
 				stderr.printf("Luxafor not found.\nPlease check :\n" +
 				    "  - When you plugged the Luxafor, does it light from red to green during 2 seconds ? If not, try on another USB port\n" +
@@ -29,7 +32,7 @@ namespace Luxafor.Cli {
 			return 0;
 		}
 		
-		private static bool validate(string[] args) {
+		private static bool validate(string[] args, Option.RegisterStack register_stack) {
 			if (args.length == 1) {
 				stderr.printf("You must pass a valid command as first argument. Please try one command as following :\n");
 				output_commands_help();
@@ -42,7 +45,7 @@ namespace Luxafor.Cli {
 				return false;
 			}
 			
-			return true;
+			return register_stack.validate(args[1]);
 		}
 		
 		private static void output_commands_help() {
