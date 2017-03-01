@@ -5,18 +5,21 @@ namespace Luxafor.Cli {
 		public static int main (string[] args) {
 			LibUSB.Context context;			
 			LibUSB.Context.init(out context); 
-			Luxafor? luxafor = new Luxafor(context);
-			if (luxafor != null) {
+			Luxafor luxafor = new Luxafor(context);
+			if (luxafor.is_ready()) {
 				
 				Effect.Color? color = get_effect(args);
 				if (color != null) {
 					luxafor.send(color);	
 				} else {
-					stderr.printf("Unkown option.");
+					stderr.printf("Unkown option.\n");
 				}
 				
 			} else {
-				stderr.printf("Luxafor not found\n");
+				stderr.printf("Luxafor not found.\nPlease check :\n" +
+				    "  - When you plug the Luxafor, does it light from red to green during 2 seconds ? If not, try on another USB port\n" +
+				    "  - Still not working ? Try another USB wire.\n"
+				);
 				return 1;
 			}
 			
