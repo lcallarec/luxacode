@@ -1,13 +1,15 @@
-namespace Luxafor.Cli.Command {
+namespace Luxafor.Cli.Option {
 	
 	private int intensity = 255;
 	private int red   = 0; 
 	private int green = 0;
 	private int blue  = 0;
 		
-	public class Color : Object {
+	public class Color : Option {
 		
 		public Color(string[] args) {
+
+			base(args);
 
 			GLib.OptionEntry[] options = {
 				OptionEntry() {
@@ -60,7 +62,11 @@ namespace Luxafor.Cli.Command {
 	
 		}
 
-		public Effect.Color? get_effect() {
+		public override string get_name() {
+			return "color";
+		}
+
+		public override Effect.Effect get_effect() {
 			return new Effect.Color((uint8) intensity, (uint8) red, (uint8) green, (uint8) blue);
 		}
 	}

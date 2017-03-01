@@ -2,13 +2,12 @@ namespace Luxafor.Cli {
 	
 	public class LuxaforCli : Object {
 
-
-		private static string[] commands = {
-			"color"
-		};
-
+		private static Option.RegisterStack register_stack;
 
 		public static int main (string[] args) {
+			
+			register_stack = new Option.RegisterStack();
+			register_stack.register(new Option.Color(args)); 
 			
 			if (false == validate(args)) {
 				return 2;
@@ -18,14 +17,7 @@ namespace Luxafor.Cli {
 			LibUSB.Context.init(out context); 
 			Luxafor luxafor = new Luxafor(context);
 			if (luxafor.is_ready()) {
-				
-				Effect.Color? color = get_effect(args);
-				if (color != null) {
-					luxafor.send(color);	
-				} else {
-					stderr.printf("Unkown option.\n");
-				}
-				
+				luxafor.send(register_stack.get_effect_for(args[1]));	
 			} else {
 				stderr.printf("Luxafor not found.\nPlease check :\n" +
 				    "  - When you plugged the Luxafor, does it light from red to green during 2 seconds ? If not, try on another USB port\n" +
@@ -36,16 +28,6 @@ namespace Luxafor.Cli {
 			
 			return 0;
 		}
-
-		public static Effect.Color? get_effect(string[] args) {
-			switch(args[1]) {
-				case "color":
-					var command = new Command.Color(args);
-					return command.get_effect();
-				default:
-					return null;
-			}
-		}
 		
 		private static bool validate(string[] args) {
 			if (args.length == 1) {
@@ -54,14 +36,7 @@ namespace Luxafor.Cli {
 				return false;
 			}
 			
-			bool is_command_registered = false;
-			foreach (string command in commands) {
-				if (command == args[1]) {
-					is_command_registered = true;
-				}
-			}
-			
-			if (false == is_command_registered) {
+			if (false == register_stack.can_handle(args[1])) {
 				stderr.printf("\"%s\" is not a known command. Please try one command as following :\n", args[1]);
 				output_commands_help();
 				return false;
@@ -73,6 +48,5 @@ namespace Luxafor.Cli {
 		private static void output_commands_help() {
 			stdout.printf("luxafor-cli color [--help]\n");
 		}
-		
 	}
 }
