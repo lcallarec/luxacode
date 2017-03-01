@@ -17,11 +17,19 @@ namespace Luxafor {
 		private static int WRITE_TIMEOUT = 10;
 		private Device.UsbDeviceFinder finder;
 		private unowned LibUSB.Context context;
-				
+		private bool is_ready = false;
+
 		public Luxafor(LibUSB.Context context) {
 			this.context = context;
+			
 			this.finder = new Device.LuxaforFinder(context);
 			this.device = finder.find();
+			
+			is_ready = (device != null);
+		}
+		
+		public bool is_ready() {
+			return is_ready;
 		}
 		
 		public void close() {

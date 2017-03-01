@@ -45,8 +45,8 @@ LibUSB.Context.init(out context);
 
 Create Luxafor :
 ```vala
-Luxafor.Luxafor? luxafor = new Luxafor.Luxafor(context);
-if (luxafor != null) {
+Luxafor.Luxafor luxafor = new Luxafor.Luxafor(context);
+if (luxafor.is_ready()) {
   //Do something...		
 }
 ```
