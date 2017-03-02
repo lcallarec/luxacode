@@ -17,8 +17,8 @@ sudo apt-get install vala libusb-1.0-0 libusb-1.0-0-dev libusb-dev
 
 ```bash
 valac --pkg libusb-1.0 --library=vala-libluxafor -H libluxafor.h \
-src/luxafor.vala src/device/usb_device_finder.vala src/device/luxafor_finder.vala \
-src/effect/effect.vala src/effect/color.vala src/effect/shutdown.vala \
+src/error.vala src/luxafor.vala src/device/usb_device_finder.vala src/device/luxafor_finder.vala src/device/error.vala \
+src/effect/effect.vala src/effect/color.vala src/effect/shutdown.vala src/effect/error.vala \
 -X -fPIC -X -shared -o libluxafor.so
 
 ```
@@ -43,18 +43,15 @@ LibUSB.Context context;
 LibUSB.Context.init(out context);	
 ```
 
-Create Luxafor :
+Create and send a command Luxafor :
 ```vala
 Luxafor.Luxafor luxafor = new Luxafor.Luxafor(context);
-if (luxafor.is_ready()) {
-  //Do something...		
+try {
+	Luxafor luxafor = new Luxafor(context);
+	luxafor.send(new Effect.Color((uint8) red, (uint8) green, (uint8) blue););	
+} catch (LuxaforError error) {
+	return 1;
 }
-```
-
-Send an effect, for exemple pure blue high-intensity color :
-```vala
-luxafor.send(new Luxafor.Effect.Color(255, 0, 0, 255));
-
 ```
 
 Shutdown the Luxafor :

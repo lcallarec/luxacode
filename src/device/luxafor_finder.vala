@@ -18,15 +18,19 @@ namespace Luxafor.Device {
 			this.context = context;
 		} 
 		
-		public LibUSB.Device? find() {
-
+		public LibUSB.Device find() throws Device.IOError {
+			
 			LibUSB.Device[] devices;
 			context.get_device_list (out devices);
-			return find_luxafor_device(devices);
-				
+			
+			try {
+				return find_luxafor_device(devices);
+			} catch (Device.IOError error) {
+				throw error;
+			}
 		}
 			
-		private LibUSB.Device? find_luxafor_device(LibUSB.Device[] devices) {
+		private LibUSB.Device find_luxafor_device(LibUSB.Device[] devices) throws Device.IOError {
 			int i = 0;
 			while (devices[i] != null)
 			{
@@ -40,7 +44,7 @@ namespace Luxafor.Device {
 				i++;
 			}
 
-			return null;
+			throw new Device.IOError.DEVICE_NOT_FOUND("Luxafor USB Device with vendorID=%04x and productIR=%04x wasn't found.".printf(LUXAFOR_VID, LUXAFOR_PID));
 		}
 	}
 }

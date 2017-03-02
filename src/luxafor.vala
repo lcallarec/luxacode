@@ -17,19 +17,17 @@ namespace Luxafor {
 		private static int WRITE_TIMEOUT = 10;
 		private Device.UsbDeviceFinder finder;
 		private unowned LibUSB.Context context;
-		private bool device_found = false;
 
-		public Luxafor(LibUSB.Context context) {
+		public Luxafor(LibUSB.Context context) throws LuxaforError {
 			this.context = context;
 			
 			this.finder = new Device.LuxaforFinder(context);
-			this.device = finder.find();
 			
-			device_found = (device != null);
-		}
-		
-		public bool is_ready() {
-			return device_found;
+			try {
+				this.device = finder.find();
+			} catch (Device.IOError error) {
+				throw new LuxaforError.ERR_DEVICE_LOOKUP("LuxaforError.ERR_CONNECT_DEVICE (unrecoverable error) : \n%s".printf(error.message));
+			}
 		}
 		
 		public void close() {
@@ -37,7 +35,7 @@ namespace Luxafor {
 			handle = null;
 		}
 		
-		public void write(uint8[] data) {
+		public void write(uint8[] data) throws Device.IOError {
 			
 			extract_handle();			
 			claim_device();
@@ -45,12 +43,23 @@ namespace Luxafor {
 			handle.bulk_transfer(1, data, out len, Luxafor.WRITE_TIMEOUT);
 		}
 		
-		public void send(Effect.Effect effect) {
-			effect.handle(this);
+		public void send(Effect.Effect effect) throws LuxaforError {
+			try {
+				effect.handle(this);
+			}
+			catch(Effect.EffectError error) {
+				throw new LuxaforError.ERR_DEVICE_COM(error.message);
+			}
 		}
 		
-		private void extract_handle() {
-			device.open(out handle);
+		private void extract_handle() throws Device.IOError {
+			
+			int result = device.open(out handle);
+			
+			if (result != 0) {
+				throw new Device.IOError.ERROR_GET_DEVICE_HANDLE("Error %d while calling `device.open(out handle)` to get back the DeviceHandle.".printf(result));
+			}
+			
 		}
 		
 		private int claim_device() {
