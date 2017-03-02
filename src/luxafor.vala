@@ -17,7 +17,7 @@ namespace Luxafor {
 		private static int WRITE_TIMEOUT = 10;
 		private Device.UsbDeviceFinder finder;
 		private unowned LibUSB.Context context;
-		private bool is_ready = false;
+		private bool device_found = false;
 
 		public Luxafor(LibUSB.Context context) {
 			this.context = context;
@@ -25,11 +25,11 @@ namespace Luxafor {
 			this.finder = new Device.LuxaforFinder(context);
 			this.device = finder.find();
 			
-			is_ready = (device != null);
+			device_found = (device != null);
 		}
 		
 		public bool is_ready() {
-			return is_ready;
+			return device_found;
 		}
 		
 		public void close() {

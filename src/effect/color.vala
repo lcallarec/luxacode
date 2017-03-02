@@ -4,7 +4,7 @@ namespace Luxafor.Effect {
 	 * 
 	 * @author Laurent Callarec <l.callarec@gmail.com>
 	 */ 
-	public class Color : Effect {
+	public class Color : Effect, Object {
 		
 		protected uint8 intensity;
 		protected uint8 red;
@@ -12,6 +12,7 @@ namespace Luxafor.Effect {
 		protected uint8 blue;
 
 		public Color(uint8 intensity, uint8 red, uint8 green, uint8 blue) {
+
 			this.intensity = intensity;
 			
 			this.red    = red;
