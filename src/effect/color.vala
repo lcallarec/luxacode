@@ -18,7 +18,7 @@ namespace Luxafor.Effect {
 		public void handle(Luxafor luxafor) throws EffectError {
 			try {
 				luxafor.write({1, 255, red, green, blue, 0, 0});
-			} catch (Device.IOError error) {
+			} catch (DeviceError error) {
 				throw new EffectError.WRITE_ERROR("Error writing 'Color' effect : %s\n".printf(error.message));
 			}
 		}

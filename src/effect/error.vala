@@ -1,3 +1,3 @@
-public errordomain Luxafor.Effect.EffectError {
+public errordomain EffectError {
 	WRITE_ERROR
 }

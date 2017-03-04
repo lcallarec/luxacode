@@ -25,7 +25,7 @@ namespace Luxafor {
 			
 			try {
 				this.device = finder.find();
-			} catch (Device.IOError error) {
+			} catch (DeviceError error) {
 				throw new LuxaforError.ERR_DEVICE_LOOKUP("LuxaforError.ERR_CONNECT_DEVICE (unrecoverable error) : \n%s".printf(error.message));
 			}
 		}
@@ -35,7 +35,7 @@ namespace Luxafor {
 			handle = null;
 		}
 		
-		public void write(uint8[] data) throws Device.IOError {
+		public void write(uint8[] data) throws DeviceError {
 			
 			extract_handle();			
 			claim_device();
@@ -47,17 +47,17 @@ namespace Luxafor {
 			try {
 				effect.handle(this);
 			}
-			catch(Effect.EffectError error) {
+			catch(EffectError error) {
 				throw new LuxaforError.ERR_DEVICE_COM(error.message);
 			}
 		}
 		
-		private void extract_handle() throws Device.IOError {
+		private void extract_handle() throws DeviceError {
 			
 			int result = device.open(out handle);
 			
 			if (result != 0) {
-				throw new Device.IOError.ERROR_GET_DEVICE_HANDLE("Error %d while calling `device.open(out handle)` to get back the DeviceHandle.".printf(result));
+				throw new DeviceError.ERROR_GET_DEVICE_HANDLE("Error %d while calling `device.open(out handle)` to get back the DeviceHandle.".printf(result));
 			}
 			
 		}
