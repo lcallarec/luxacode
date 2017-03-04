@@ -20,25 +20,24 @@
  * 
  * 
  */
-Luxafor.Luxafor? luxafor;
+using global::Luxafor;
+	
 public static int main(string[] args)
 {
 	LibUSB.Context context;
 	LibUSB.Context.init(out context);	
 	
-	luxafor = new Luxafor.Luxafor(context);
-	if (luxafor != null) {
-		
-		luxafor.send(new Luxafor.Effect.Color(255, 0, 0, 255));
-		
+	try {
+		Luxafor.Luxafor luxafor = new Luxafor.Luxafor(context);
+		luxafor.send(new Effect.Color(255, 255, 255));
 		//Wait a bit :p
-		for(int i = 0;i < 500000000;i++) {}
-
-		luxafor.send(new Luxafor.Effect.Shutdown());
+		Thread.usleep(1000000);
+		luxafor.send(new Effect.Shutdown());
+	} catch (LuxaforError error) {
+		stderr.printf("Error : %s\n", error.message);
 		
-	} else {
-		stdout.printf ("FAILED TO CREATE LUXAFOR\n");
+		return 1;
 	}
 	
-	return 0;
+	return 0;	
 }

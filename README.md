@@ -30,7 +30,7 @@ src/effect/effect.vala src/effect/color.vala src/effect/shutdown.vala src/effect
 
 ```bash
 $ sudo su -
-$ valac --pkg libusb-1.0 vala-libluxafor.vapi main.vala -X libluxafor.so -X -I. -o luxafor-cli
+$ valac --pkg libusb-1.0 vala-libluxafor.vapi cli.vala -X libluxafor.so -X -I. -o luxafor-cli
 $ export LD_LIBRARY_PATH=. && ./luxafor-cli
 
 ```
