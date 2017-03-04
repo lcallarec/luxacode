@@ -17,7 +17,6 @@ namespace Luxafor.Cli {
 			
 			LibUSB.Context context;			
 			LibUSB.Context.init(out context); 
-			
 
 			try {
 				Luxafor luxafor = new Luxafor(context);
@@ -37,14 +36,22 @@ namespace Luxafor.Cli {
 		}
 		
 		private static bool validate(string[] args, Option.RegisterStack register_stack) {
+			
+			if(args[1] == null) {
+				stderr.printf("Please try a valid command :\n");
+				output_commands_help();
+				return false;
+			}
+			
 			if (args.length == 1) {
 				stderr.printf("You must pass a valid command as first argument. Please try one command as following :\n");
 				output_commands_help();
 				return false;
 			}
+
 			
 			if (false == register_stack.can_handle(args[1])) {
-				stderr.printf("\"%s\" is not a known command. Please try one command as following :\n", args[1]);
+				stderr.printf("\"%s\" is not a known command. Please try a valid command :\n", args[1]);
 				output_commands_help();
 				return false;
 			}
