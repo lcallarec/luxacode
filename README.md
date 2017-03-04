@@ -29,8 +29,8 @@ If you need to contribute, it may be easier to compile with vala-libluxafor sour
 In that case, symlink `lib/libluxafor` with the folder containing `vala-libluxafor` repository and run :
 
 ```bash
-$ valac --pkg libusb-1.0 src/luxafor.vala src/option/color.vala src/option/option.vala src/option/register_stack.vala lib/libluxafor/luxafor.vala lib/libluxafor/device/usb_device_finder.vala lib/libluxafor/device/luxafor_finder.vala lib/libluxafor/effect/effect.vala lib/libluxafor/effect/color.vala lib/libluxafor/effect/shutdown.vala -o luxafor-cli
-$ sudo ./luxafor-cli color --intensity=255 --red=255"
+$ valac --pkg libusb-1.0 src/luxafor.vala src/option/color.vala src/option/option.vala src/option/register_stack.vala lib/libluxafor/error.vala lib/libluxafor/luxafor.vala lib/libluxafor/device/usb_device_finder.vala lib/libluxafor/device/error.vala lib/libluxafor/device/luxafor_finder.vala lib/libluxafor/effect/effect.vala lib/libluxafor/effect/color.vala lib/libluxafor/effect/shutdown.vala lib/libluxafor/effect/error.vala -o luxafor-cli
+$ sudo ./luxafor-cli color --led=255 --red=255"
 ```
 
 ## Usage

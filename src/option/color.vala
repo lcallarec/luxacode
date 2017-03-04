@@ -1,6 +1,5 @@
 namespace Luxafor.Cli.Option {
 	
-	private int intensity = 255;
 	private int red   = -1; 
 	private int green = -1;
 	private int blue  = -1;
@@ -10,15 +9,6 @@ namespace Luxafor.Cli.Option {
 		public Color(string[] args) {
 
 			GLib.OptionEntry[] options = {
-				OptionEntry() {
-					long_name = "intensity",
-					short_name = 'i',
-					flags = 0,
-					arg = GLib.OptionArg.INT,
-					arg_data = &intensity,
-					description = "Light intensity [0-255]",
-					arg_description = "INTENSITY"
-				},
 				OptionEntry() {
 					long_name = "red",
 					short_name = 'r',
@@ -66,7 +56,7 @@ namespace Luxafor.Cli.Option {
 		}
 
 		public override Effect.Effect get_effect() {
-			return new Effect.Color((uint8) intensity, (uint8) red, (uint8) green, (uint8) blue);
+			return new Effect.Color((uint8) red, (uint8) green, (uint8) blue);
 		}
 		
 		public override bool validate() {

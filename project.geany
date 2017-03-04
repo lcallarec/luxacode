@@ -20,13 +20,30 @@ indent_mode=2
 [project]
 name=LuxaforCli
 base_path=/home/laurent/projects/git/luxafor-cli
+description=
 
 [long line marker]
 long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=-1
+current_page=1
+FILE_NAME_0=90;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2Fsrc%2Fdevice%2Ferror.vala;0;4
+FILE_NAME_1=1476;Markdown;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2FREADME.md;0;4
+FILE_NAME_2=1111;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2Fsrc%2Fdevice%2Fluxafor_finder.vala;0;4
+FILE_NAME_3=200;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2Fsrc%2Fdevice%2Fusb_device_finder.vala;0;4
+FILE_NAME_4=1418;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2Fsrc%2Fluxafor.vala;0;4
+FILE_NAME_5=155;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2Fsrc%2Feffect%2Fcolor.vala;0;4
+FILE_NAME_6=188;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2Fsrc%2Feffect%2Feffect.vala;0;4
+FILE_NAME_7=281;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2Fsrc%2Feffect%2Fshutdown.vala;0;4
+FILE_NAME_8=1525;Markdown;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fluxafor-cli%2FREADME.md;0;4
+FILE_NAME_9=60;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2Fsrc%2Feffect%2Ferror.vala;0;4
+FILE_NAME_10=77;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2Fsrc%2Ferror.vala;0;4
+FILE_NAME_11=0;None;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fluxafor-cli%2FLICENSE;0;4
+FILE_NAME_12=290;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fluxafor-cli%2Fsrc%2Fluxafor.vala;0;4
+FILE_NAME_13=1424;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fluxafor-cli%2Fsrc%2Foption%2Fcolor.vala;0;4
+FILE_NAME_14=0;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fluxafor-cli%2Fsrc%2Foption%2Foption.vala;0;4
+FILE_NAME_15=0;Vala;0;EUTF-8;1;1;0;%2Fhome%2Flaurent%2Fprojects%2Fgit%2Fvala-libluxafor%2Fmain.vala;0;4
 
 [VTE]
 last_dir=/home/laurent

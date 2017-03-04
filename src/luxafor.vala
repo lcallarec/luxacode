@@ -1,5 +1,7 @@
 namespace Luxafor.Cli {
 	
+	using global::Luxafor;
+	
 	public class LuxaforCli : Object {
 
 		private static Option.RegisterStack register_stack;
@@ -15,16 +17,18 @@ namespace Luxafor.Cli {
 			
 			LibUSB.Context context;			
 			LibUSB.Context.init(out context); 
-			Luxafor luxafor = new Luxafor(context);
-			if (luxafor.is_ready()) {
+			
+
+			try {
+				Luxafor luxafor = new Luxafor(context);
 				Effect.Effect? effect = register_stack.get_effect_for(args[1]);
 				if (effect != null) {
 					luxafor.send(effect);	
 				}
-			} else {
-				stderr.printf("Luxafor not found.\nPlease check :\n" +
+			} catch (LuxaforError error) {
+				stderr.printf("Error : \n=======\n%s\n\nPlease check :\n" +
 				    "  - When you plugged the Luxafor, does it light from red to green during 2 seconds ? If not, try on another USB port\n" +
-				    "  - Still not working ? Try another USB wire.\n"
+				    "  - Still not working ? Try another USB wire.\n", error.message
 				);
 				return 1;
 			}
