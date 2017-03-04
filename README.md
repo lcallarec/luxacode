@@ -16,21 +16,20 @@ sudo apt-get install vala libusb-1.0-0 libusb-1.0-0-dev libusb-dev
 ### Compile the shared library
 
 ```bash
-valac --pkg libusb-1.0 --library=vala-libluxafor -H libluxafor.h \
-src/error.vala src/luxafor.vala src/device/usb_device_finder.vala src/device/luxafor_finder.vala src/device/error.vala \
-src/effect/effect.vala src/effect/color.vala src/effect/shutdown.vala src/effect/error.vala \
--X -fPIC -X -shared -o libluxafor.so
+$ make so
 
 ```
 
-## Sandbox : main.vala && luxafor-cli
+### Functionnal tests w/ Luxafor-cli sandbox :
 
-`su` access is needed to make `libluxafor.so` easily reachable at runtime and allow `luxafor-cli` to access USB devices.
-(accessing USB devices is always disabled by default for 'non-root' user on every Linux distributions).
+
+The `luxafor-cli` is mainy used to execute functionnal test from the command-line. It is compiled against the libluxafor shared object.
+
+`su` is needed to allow `luxafor-cli` to access USB devices.
 
 ```bash
+$ make ftest
 $ sudo su -
-$ valac --pkg libusb-1.0 vala-libluxafor.vapi cli.vala -X libluxafor.so -X -I. -o luxafor-cli
 $ export LD_LIBRARY_PATH=. && ./luxafor-cli
 
 ```
@@ -52,6 +51,12 @@ try {
 } catch (LuxaforError error) {
 	return 1;
 }
+```
+
+Change the Color:
+```
+# Pure red color
+luxafor.send(new Effect.Color((uint8) 255, (uint8) 0, (uint8) 0););	
 ```
 
 Shutdown the Luxafor :
