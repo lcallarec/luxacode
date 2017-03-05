@@ -27,7 +27,7 @@ namespace Luxafor.Cli {
 					luxafor.send(effect);	
 				}
 			} catch (LuxaforError error) {
-				stderr.printf("Error : \n=======\n%s\n\nPlease check :\n" +
+				stderr.printf("Error : \n=======\n%s\n\nPlease eventually check :\n" +
 				    "  - When you plugged the Luxafor, does it light from red to green during 2 seconds ? If not, try on another USB port\n" +
 				    "  - Still not working ? Try another USB wire.\n", error.message
 				);
