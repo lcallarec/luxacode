@@ -33,7 +33,6 @@
 *.su
 
 # Project scope
-luxafor-cli
+test-cli
 libluxafor.h
 vala-libluxafor.vapi
-luxafor

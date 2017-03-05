@@ -30,8 +30,16 @@ public static int main(string[] args)
 	try {
 		Luxafor.Luxafor luxafor = new Luxafor.Luxafor(context);
 		luxafor.send(new Effect.Color(255, 255, 255));
-		//Wait a bit :p
+
 		Thread.usleep(1000000);
+		
+		for (int i = 0; i < 5;i++) {
+			luxafor.send(new Effect.RandomColor());
+			Thread.usleep(250000);
+		}
+
+		Thread.usleep(1000000);
+
 		luxafor.send(new Effect.Shutdown());
 	} catch (LuxaforError error) {
 		stderr.printf("Error : %s\n", error.message);

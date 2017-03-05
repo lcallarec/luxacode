@@ -57,6 +57,7 @@ Change the Color:
 ```
 # Pure red color
 luxafor.send(new Effect.Color((uint8) 255, (uint8) 0, (uint8) 0););	
+luxafor.send(new Luxafor.Effect.RandomColor());
 ```
 
 Shutdown the Luxafor :
