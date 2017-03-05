@@ -56,11 +56,19 @@ Default values :
 --green=0
 --blue=0
 ```
+
 #### Shutdown the Luxafor
 
 ```bash
-# Shutdown
+# Shutdown the Luxafor
 $ sudo ./luxafor-cli shutdown
+```
+
+#### Random color
+
+```bash
+# Randomly change color
+$ sudo ./luxafor-cli random-color
 ```
 
 #### More features ?
