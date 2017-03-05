@@ -57,6 +57,10 @@ namespace Luxafor.Cli.Option {
 				return false;
 			}
 
+			if (false == this.validate_8bits_inputs(red, green, blue)) {
+				return false;
+			}
+
 			if (red < 0 && green < 0 && blue < 0) {
 				stderr.printf("You must at least set one color : --red=[0-255], --green[0-255] or --blue[0-255] (-r [0-255], -g [0-255] -b [0-255]).\n");
 				return false;
