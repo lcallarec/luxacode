@@ -28,10 +28,10 @@ namespace Luxafor.Cli.Option {
 			return null;
 		}
 		
-		public bool validate(string name) {
+		public bool validate(string name, string[] args) {
 			Option? option = find_option_from_name(name);
 			if (option != null) {
-				return option.is_valid();
+				return option.validate(args);
 			}
 			
 			return false;

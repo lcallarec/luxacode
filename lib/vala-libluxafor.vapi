@@ -8,32 +8,50 @@ namespace Luxafor {
 		}
 		[CCode (cheader_filename = "libluxafor.h")]
 		public interface UsbDeviceFinder : GLib.Object {
-			public abstract LibUSB.Device? find ();
+			public abstract LibUSB.Device find () throws DeviceError;
 		}
 	}
 	namespace Effect {
 		[CCode (cheader_filename = "libluxafor.h")]
-		public class Color : global::Luxafor.Effect.Effect {
+		public class Color : global::Luxafor.Effect.Effect, GLib.Object {
 			protected uint8 blue;
 			protected uint8 green;
-			protected uint8 intensity;
 			protected uint8 red;
-			public Color (uint8 intensity, uint8 red, uint8 green, uint8 blue);
+			public Color (uint8 red, uint8 green, uint8 blue);
 		}
 		[CCode (cheader_filename = "libluxafor.h")]
-		public class Shutdown : global::Luxafor.Effect.Effect {
+		public class RandomColor : global::Luxafor.Effect.Effect, GLib.Object {
+			public RandomColor ();
+		}
+		[CCode (cheader_filename = "libluxafor.h")]
+		public class Shutdown : global::Luxafor.Effect.Effect, GLib.Object {
 			public Shutdown ();
 		}
 		[CCode (cheader_filename = "libluxafor.h")]
-		public interface Effect {
-			public abstract void handle (global::Luxafor.Luxafor luxafor);
+		public interface Effect : GLib.Object {
+			public abstract void handle (global::Luxafor.Luxafor luxafor) throws EffectError;
 		}
 	}
 	[CCode (cheader_filename = "libluxafor.h")]
 	public class Luxafor {
-		public Luxafor (LibUSB.Context context);
+		public Luxafor (LibUSB.Context context) throws LuxaforError;
 		public void close ();
-		public void send (global::Luxafor.Effect.Effect effect);
-		public void write (uint8[] data);
+		public void send (global::Luxafor.Effect.Effect effect) throws LuxaforError;
+		public void write (uint8[] data) throws DeviceError;
 	}
+}
+[CCode (cheader_filename = "libluxafor.h")]
+public errordomain LuxaforError {
+	ERR_DEVICE_LOOKUP,
+	ERR_DEVICE_COM
+}
+[CCode (cheader_filename = "libluxafor.h")]
+public errordomain DeviceError {
+	DEVICE_NOT_FOUND,
+	ERROR_GET_DEVICE_HANDLE,
+	WRITE_ERROR
+}
+[CCode (cheader_filename = "libluxafor.h")]
+public errordomain EffectError {
+	WRITE_ERROR
 }

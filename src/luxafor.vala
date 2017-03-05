@@ -9,7 +9,8 @@ namespace Luxafor.Cli {
 		public static int main (string[] args) {
 			
 			register_stack = new Option.RegisterStack();
-			register_stack.register(new Option.Color(args));
+			register_stack.register(new Option.Color());
+			register_stack.register(new Option.Shutdown());			
 			
 			if (false == validate(args, register_stack)) {
 				return 2;
@@ -56,11 +57,12 @@ namespace Luxafor.Cli {
 				return false;
 			}
 			
-			return register_stack.validate(args[1]);
+			return register_stack.validate(args[1], args);
 		}
 		
 		private static void output_commands_help() {
 			stdout.printf("luxafor-cli color [--help]\n");
+			stdout.printf("luxafor-cli shutdown [--help]\n");			
 		}
 	}
 }

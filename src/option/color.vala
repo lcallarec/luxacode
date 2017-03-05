@@ -5,8 +5,16 @@ namespace Luxafor.Cli.Option {
 	private int blue  = -1;
 		
 	public class Color : Option {
+
+		public override string get_name() {
+			return "color";
+		}
+
+		public override Effect.Effect get_effect() {
+			return new Effect.Color((uint8) red, (uint8) green, (uint8) blue);
+		}
 		
-		public Color(string[] args) {
+		public override bool validate(string[] args) {
 
 			GLib.OptionEntry[] options = {
 				OptionEntry() {
@@ -46,20 +54,8 @@ namespace Luxafor.Cli.Option {
 			} catch (OptionError e) {
 				stderr.printf ("error: %s\n", e.message);
 				stdout.printf ("Run '%s --help' to see a full list of available command line options.\n", args[0]);
+				return false;
 			}
-			
-			base(args);
-		}
-
-		public override string get_name() {
-			return "color";
-		}
-
-		public override Effect.Effect get_effect() {
-			return new Effect.Color((uint8) red, (uint8) green, (uint8) blue);
-		}
-		
-		public override bool validate() {
 
 			if (red < 0 && green < 0 && blue < 0) {
 				stderr.printf("You must at least set one color : --red=[0-255], --green[0-255] or --blue[0-255] (-r [0-255], -g [0-255] -b [0-255]).\n");

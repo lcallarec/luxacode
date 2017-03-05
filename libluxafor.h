@@ -71,6 +71,22 @@ typedef struct _LuxaforEffectShutdown LuxaforEffectShutdown;
 typedef struct _LuxaforEffectShutdownClass LuxaforEffectShutdownClass;
 typedef struct _LuxaforEffectShutdownPrivate LuxaforEffectShutdownPrivate;
 
+#define LUXAFOR_EFFECT_TYPE_RANDOM_COLOR (luxafor_effect_random_color_get_type ())
+#define LUXAFOR_EFFECT_RANDOM_COLOR(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), LUXAFOR_EFFECT_TYPE_RANDOM_COLOR, LuxaforEffectRandomColor))
+#define LUXAFOR_EFFECT_RANDOM_COLOR_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), LUXAFOR_EFFECT_TYPE_RANDOM_COLOR, LuxaforEffectRandomColorClass))
+#define LUXAFOR_EFFECT_IS_RANDOM_COLOR(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), LUXAFOR_EFFECT_TYPE_RANDOM_COLOR))
+#define LUXAFOR_EFFECT_IS_RANDOM_COLOR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), LUXAFOR_EFFECT_TYPE_RANDOM_COLOR))
+#define LUXAFOR_EFFECT_RANDOM_COLOR_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), LUXAFOR_EFFECT_TYPE_RANDOM_COLOR, LuxaforEffectRandomColorClass))
+
+typedef struct _LuxaforEffectRandomColor LuxaforEffectRandomColor;
+typedef struct _LuxaforEffectRandomColorClass LuxaforEffectRandomColorClass;
+typedef struct _LuxaforEffectRandomColorPrivate LuxaforEffectRandomColorPrivate;
+
+typedef enum  {
+	LUXAFOR_ERROR_ERR_DEVICE_LOOKUP,
+	LUXAFOR_ERROR_ERR_DEVICE_COM
+} LuxaforError;
+#define LUXAFOR_ERROR luxafor_error_quark ()
 struct _LuxaforLuxafor {
 	GTypeInstance parent_instance;
 	volatile int ref_count;
@@ -82,14 +98,24 @@ struct _LuxaforLuxaforClass {
 	void (*finalize) (LuxaforLuxafor *self);
 };
 
+typedef enum  {
+	DEVICE_ERROR_DEVICE_NOT_FOUND,
+	DEVICE_ERROR_ERROR_GET_DEVICE_HANDLE,
+	DEVICE_ERROR_WRITE_ERROR
+} DeviceError;
+#define DEVICE_ERROR device_error_quark ()
+typedef enum  {
+	EFFECT_ERROR_WRITE_ERROR
+} EffectError;
+#define EFFECT_ERROR effect_error_quark ()
 struct _LuxaforEffectEffectIface {
 	GTypeInterface parent_iface;
-	void (*handle) (LuxaforEffectEffect* self, LuxaforLuxafor* luxafor);
+	void (*handle) (LuxaforEffectEffect* self, LuxaforLuxafor* luxafor, GError** error);
 };
 
 struct _LuxaforDeviceUsbDeviceFinderIface {
 	GTypeInterface parent_iface;
-	libusb_device* (*find) (LuxaforDeviceUsbDeviceFinder* self);
+	libusb_device* (*find) (LuxaforDeviceUsbDeviceFinder* self, GError** error);
 };
 
 struct _LuxaforDeviceLuxaforFinder {
@@ -102,32 +128,37 @@ struct _LuxaforDeviceLuxaforFinderClass {
 };
 
 struct _LuxaforEffectColor {
-	GTypeInstance parent_instance;
-	volatile int ref_count;
+	GObject parent_instance;
 	LuxaforEffectColorPrivate * priv;
-	guint8 intensity;
 	guint8 red;
 	guint8 green;
 	guint8 blue;
 };
 
 struct _LuxaforEffectColorClass {
-	GTypeClass parent_class;
-	void (*finalize) (LuxaforEffectColor *self);
+	GObjectClass parent_class;
 };
 
 struct _LuxaforEffectShutdown {
-	GTypeInstance parent_instance;
-	volatile int ref_count;
+	GObject parent_instance;
 	LuxaforEffectShutdownPrivate * priv;
 };
 
 struct _LuxaforEffectShutdownClass {
-	GTypeClass parent_class;
-	void (*finalize) (LuxaforEffectShutdown *self);
+	GObjectClass parent_class;
+};
+
+struct _LuxaforEffectRandomColor {
+	GObject parent_instance;
+	LuxaforEffectRandomColorPrivate * priv;
+};
+
+struct _LuxaforEffectRandomColorClass {
+	GObjectClass parent_class;
 };
 
 
+GQuark luxafor_error_quark (void);
 gpointer luxafor_luxafor_ref (gpointer instance);
 void luxafor_luxafor_unref (gpointer instance);
 GParamSpec* luxafor_param_spec_luxafor (const gchar* name, const gchar* nick, const gchar* blurb, GType object_type, GParamFlags flags);
@@ -135,36 +166,29 @@ void luxafor_value_set_luxafor (GValue* value, gpointer v_object);
 void luxafor_value_take_luxafor (GValue* value, gpointer v_object);
 gpointer luxafor_value_get_luxafor (const GValue* value);
 GType luxafor_luxafor_get_type (void) G_GNUC_CONST;
-LuxaforLuxafor* luxafor_luxafor_new (libusb_context* context);
-LuxaforLuxafor* luxafor_luxafor_construct (GType object_type, libusb_context* context);
+LuxaforLuxafor* luxafor_luxafor_new (libusb_context* context, GError** error);
+LuxaforLuxafor* luxafor_luxafor_construct (GType object_type, libusb_context* context, GError** error);
 void luxafor_luxafor_close (LuxaforLuxafor* self);
-void luxafor_luxafor_write (LuxaforLuxafor* self, guint8* data, int data_length1);
+GQuark device_error_quark (void);
+void luxafor_luxafor_write (LuxaforLuxafor* self, guint8* data, int data_length1, GError** error);
+GQuark effect_error_quark (void);
 GType luxafor_effect_effect_get_type (void) G_GNUC_CONST;
-void luxafor_luxafor_send (LuxaforLuxafor* self, LuxaforEffectEffect* effect);
+void luxafor_luxafor_send (LuxaforLuxafor* self, LuxaforEffectEffect* effect, GError** error);
 GType luxafor_device_usb_device_finder_get_type (void) G_GNUC_CONST;
-libusb_device* luxafor_device_usb_device_finder_find (LuxaforDeviceUsbDeviceFinder* self);
+libusb_device* luxafor_device_usb_device_finder_find (LuxaforDeviceUsbDeviceFinder* self, GError** error);
 GType luxafor_device_luxafor_finder_get_type (void) G_GNUC_CONST;
 LuxaforDeviceLuxaforFinder* luxafor_device_luxafor_finder_new (libusb_context* context);
 LuxaforDeviceLuxaforFinder* luxafor_device_luxafor_finder_construct (GType object_type, libusb_context* context);
-void luxafor_effect_effect_handle (LuxaforEffectEffect* self, LuxaforLuxafor* luxafor);
-gpointer luxafor_effect_color_ref (gpointer instance);
-void luxafor_effect_color_unref (gpointer instance);
-GParamSpec* luxafor_effect_param_spec_color (const gchar* name, const gchar* nick, const gchar* blurb, GType object_type, GParamFlags flags);
-void luxafor_effect_value_set_color (GValue* value, gpointer v_object);
-void luxafor_effect_value_take_color (GValue* value, gpointer v_object);
-gpointer luxafor_effect_value_get_color (const GValue* value);
+void luxafor_effect_effect_handle (LuxaforEffectEffect* self, LuxaforLuxafor* luxafor, GError** error);
 GType luxafor_effect_color_get_type (void) G_GNUC_CONST;
-LuxaforEffectColor* luxafor_effect_color_new (guint8 intensity, guint8 red, guint8 green, guint8 blue);
-LuxaforEffectColor* luxafor_effect_color_construct (GType object_type, guint8 intensity, guint8 red, guint8 green, guint8 blue);
-gpointer luxafor_effect_shutdown_ref (gpointer instance);
-void luxafor_effect_shutdown_unref (gpointer instance);
-GParamSpec* luxafor_effect_param_spec_shutdown (const gchar* name, const gchar* nick, const gchar* blurb, GType object_type, GParamFlags flags);
-void luxafor_effect_value_set_shutdown (GValue* value, gpointer v_object);
-void luxafor_effect_value_take_shutdown (GValue* value, gpointer v_object);
-gpointer luxafor_effect_value_get_shutdown (const GValue* value);
+LuxaforEffectColor* luxafor_effect_color_new (guint8 red, guint8 green, guint8 blue);
+LuxaforEffectColor* luxafor_effect_color_construct (GType object_type, guint8 red, guint8 green, guint8 blue);
 GType luxafor_effect_shutdown_get_type (void) G_GNUC_CONST;
 LuxaforEffectShutdown* luxafor_effect_shutdown_new (void);
 LuxaforEffectShutdown* luxafor_effect_shutdown_construct (GType object_type);
+GType luxafor_effect_random_color_get_type (void) G_GNUC_CONST;
+LuxaforEffectRandomColor* luxafor_effect_random_color_new (void);
+LuxaforEffectRandomColor* luxafor_effect_random_color_construct (GType object_type);
 
 
 G_END_DECLS

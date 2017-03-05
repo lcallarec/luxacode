@@ -11,7 +11,7 @@ sudo apt-get install vala libusb-1.0-0 libusb-1.0-0-dev libusb-dev
 
 Compile :
 ```bash
-$ valac --pkg libusb-1.0 lib/vala-libluxafor.vapi src/luxafor.vala src/option/color.vala -X lib/libluxafor.so -X -I. -o luxafor-cli
+$ make compile
 ```
 
 Execute :
@@ -19,7 +19,7 @@ Execute :
 For execution, `su` access is needed to make libluxafor.so easily reachable at runtime and allow luxafor-cli to access USB devices in a one-line command. (accessing USB devices is always disabled by default for 'non-root' user on every Linux distributions).
 
 ```bash
-$ sudo bash -c "export LD_LIBRARY_PATH=lib/ && ./luxafor-cli color --intensity=255 --red=255"
+$ sudo bash -c "export LD_LIBRARY_PATH=lib/ && ./luxafor-cli color --red=255"
 ```
 
 ### Build from vala-libluxafor sources
@@ -29,8 +29,8 @@ If you need to contribute, it may be easier to compile with vala-libluxafor sour
 In that case, symlink `lib/libluxafor` with the folder containing `vala-libluxafor` repository and run :
 
 ```bash
-$ valac --pkg libusb-1.0 src/luxafor.vala src/option/color.vala src/option/option.vala src/option/register_stack.vala lib/libluxafor/error.vala lib/libluxafor/luxafor.vala lib/libluxafor/device/usb_device_finder.vala lib/libluxafor/device/error.vala lib/libluxafor/device/luxafor_finder.vala lib/libluxafor/effect/effect.vala lib/libluxafor/effect/color.vala lib/libluxafor/effect/shutdown.vala lib/libluxafor/effect/error.vala -o luxafor-cli
-$ sudo ./luxafor-cli color --led=255 --red=255"
+$ make
+$ sudo ./luxafor-cli color --red=255"
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ $ sudo ./luxafor-cli color --led=255 --red=255"
 Inline help :
 
 ```bash
-$ sudo ./luxafor-cli color --help
+$ sudo ./luxafor-cli --help
 ```
 
 ### Features
@@ -52,10 +52,15 @@ $ sudo ./luxafor-cli color --intensity=255 --red=255 --green=0 --blue=0
 
 Default values :
 ```
---intensity=255
 --red=0
 --green=0
 --blue=0
+```
+#### Shutdown the Luxafor
+
+```bash
+# Shutdown
+$ sudo ./luxafor-cli shutdown
 ```
 
 #### More features ?
