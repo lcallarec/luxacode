@@ -29,10 +29,13 @@ public static int main(string[] args)
 	
 	try {
 		Luxafor.Luxafor luxafor = new Luxafor.Luxafor(context);
+		
+		stdout.printf("White color\n");
 		luxafor.send(new Effect.Color(255, 255, 255));
 
 		Thread.usleep(1000000);
 		
+		stdout.printf("5 random colors\n");
 		for (int i = 0; i < 5;i++) {
 			luxafor.send(new Effect.RandomColor());
 			Thread.usleep(250000);
@@ -40,7 +43,14 @@ public static int main(string[] args)
 
 		Thread.usleep(1000000);
 
+		stdout.printf("Red color using raw effect\n");
+		luxafor.send(new Effect.Raw({1, 255, 255, 0, 0, 0, 0}));
+		
+		Thread.usleep(1000000);
+		
+		stdout.printf("Shutdown the device\n");
 		luxafor.send(new Effect.Shutdown());
+		
 	} catch (LuxaforError error) {
 		stderr.printf("Error : %s\n", error.message);
 		

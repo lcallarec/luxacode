@@ -57,9 +57,10 @@ namespace Luxafor {
 			int result = device.open(out handle);
 			
 			if (result != 0) {
-				throw new DeviceError.ERROR_GET_DEVICE_HANDLE("Error %d while calling `device.open(out handle)` to get back the DeviceHandle.".printf(result));
+				throw new DeviceError.ERROR_GET_DEVICE_HANDLE(
+					"Error %d while calling `device.open(out handle)` to get back the DeviceHandle.\n".printf(result) +
+					"Did you run your progam with sufficient privileges to access USB device ? If not, try running your program with su privileges.");
 			}
-			
 		}
 		
 		private int claim_device() {

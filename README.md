@@ -36,13 +36,13 @@ $ export LD_LIBRARY_PATH=. && ./luxafor-cli
 
 ## Vala API
 
-Init LibUSB :
+### Init LibUSB submodule
 ```vala
 LibUSB.Context context;
 LibUSB.Context.init(out context);	
 ```
 
-Create and send a command Luxafor :
+### Create and send a Luxafor command
 ```vala
 Luxafor.Luxafor luxafor = new Luxafor.Luxafor(context);
 try {
@@ -53,20 +53,27 @@ try {
 }
 ```
 
-Change the Color:
+### Change the Color
 ```
 # Pure red color
 luxafor.send(new Effect.Color((uint8) 255, (uint8) 0, (uint8) 0););	
 luxafor.send(new Luxafor.Effect.RandomColor());
 ```
 
-Shutdown the Luxafor :
+### Send raw values
+* This effect is used to send user-defined raw bytes to the Luxafor USB device.
+* Send raw data - if you don't know what you are doing - may need a device restart (plug / unplug) is something goes wrong on the Luxafor side
+```
+luxafor.send(new Luxafor.Effect.Raw((uint8) 1, (uint8) 255, (uint8) 255, (uint8) 0, (uint8) 0, (uint8) 0, (uint8) 0));
+```
+
+### Shutdown the Luxafor :
 ```
 luxafor.send(new Luxafor.Effect.Shutdown());
 ```
 
-There's not so many effects, for now. But feel free to contribute quicker and better than me :p
-
 ## Contribute
+
+There's not so many effects, for now. But feel free to contribute quicker and better than I can :p
 
 Any contributions are welcome, don't be shy !
