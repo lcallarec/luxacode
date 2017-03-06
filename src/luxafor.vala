@@ -12,6 +12,7 @@ namespace Luxafor.Cli {
 			register_stack.register(new Option.Color());
 			register_stack.register(new Option.Shutdown());
 			register_stack.register(new Option.RandomColor());
+			register_stack.register(new Option.Raw());
 			
 			if (false == validate(args, register_stack)) {
 				return 2;
@@ -65,6 +66,7 @@ namespace Luxafor.Cli {
 			stdout.printf("luxafor-cli color [--help]\n");
 			stdout.printf("luxafor-cli shutdown \n");			
 			stdout.printf("luxafor-cli random-color \n");
+			stdout.printf("luxafor-cli raw [--help]\n");
 		}
 	}
 }

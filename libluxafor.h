@@ -49,6 +49,17 @@ typedef struct _LuxaforDeviceLuxaforFinder LuxaforDeviceLuxaforFinder;
 typedef struct _LuxaforDeviceLuxaforFinderClass LuxaforDeviceLuxaforFinderClass;
 typedef struct _LuxaforDeviceLuxaforFinderPrivate LuxaforDeviceLuxaforFinderPrivate;
 
+#define LUXAFOR_EFFECT_TYPE_RAW (luxafor_effect_raw_get_type ())
+#define LUXAFOR_EFFECT_RAW(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), LUXAFOR_EFFECT_TYPE_RAW, LuxaforEffectRaw))
+#define LUXAFOR_EFFECT_RAW_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), LUXAFOR_EFFECT_TYPE_RAW, LuxaforEffectRawClass))
+#define LUXAFOR_EFFECT_IS_RAW(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), LUXAFOR_EFFECT_TYPE_RAW))
+#define LUXAFOR_EFFECT_IS_RAW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), LUXAFOR_EFFECT_TYPE_RAW))
+#define LUXAFOR_EFFECT_RAW_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), LUXAFOR_EFFECT_TYPE_RAW, LuxaforEffectRawClass))
+
+typedef struct _LuxaforEffectRaw LuxaforEffectRaw;
+typedef struct _LuxaforEffectRawClass LuxaforEffectRawClass;
+typedef struct _LuxaforEffectRawPrivate LuxaforEffectRawPrivate;
+
 #define LUXAFOR_EFFECT_TYPE_COLOR (luxafor_effect_color_get_type ())
 #define LUXAFOR_EFFECT_COLOR(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), LUXAFOR_EFFECT_TYPE_COLOR, LuxaforEffectColor))
 #define LUXAFOR_EFFECT_COLOR_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), LUXAFOR_EFFECT_TYPE_COLOR, LuxaforEffectColorClass))
@@ -127,6 +138,19 @@ struct _LuxaforDeviceLuxaforFinderClass {
 	GObjectClass parent_class;
 };
 
+struct _LuxaforEffectRaw {
+	GObject parent_instance;
+	LuxaforEffectRawPrivate * priv;
+	guint8* bytes;
+	gint bytes_length1;
+	guint8 green;
+	guint8 blue;
+};
+
+struct _LuxaforEffectRawClass {
+	GObjectClass parent_class;
+};
+
 struct _LuxaforEffectColor {
 	GObject parent_instance;
 	LuxaforEffectColorPrivate * priv;
@@ -180,6 +204,9 @@ GType luxafor_device_luxafor_finder_get_type (void) G_GNUC_CONST;
 LuxaforDeviceLuxaforFinder* luxafor_device_luxafor_finder_new (libusb_context* context);
 LuxaforDeviceLuxaforFinder* luxafor_device_luxafor_finder_construct (GType object_type, libusb_context* context);
 void luxafor_effect_effect_handle (LuxaforEffectEffect* self, LuxaforLuxafor* luxafor, GError** error);
+GType luxafor_effect_raw_get_type (void) G_GNUC_CONST;
+LuxaforEffectRaw* luxafor_effect_raw_new (guint8* bytes, int bytes_length1);
+LuxaforEffectRaw* luxafor_effect_raw_construct (GType object_type, guint8* bytes, int bytes_length1);
 GType luxafor_effect_color_get_type (void) G_GNUC_CONST;
 LuxaforEffectColor* luxafor_effect_color_new (guint8 red, guint8 green, guint8 blue);
 LuxaforEffectColor* luxafor_effect_color_construct (GType object_type, guint8 red, guint8 green, guint8 blue);

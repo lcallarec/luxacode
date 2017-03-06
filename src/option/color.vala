@@ -57,7 +57,7 @@ namespace Luxafor.Cli.Option {
 				return false;
 			}
 
-			if (false == this.validate_8bits_inputs(red, green, blue)) {
+			if (false == this.validate_8bits_inputs(3, red, green, blue)) {
 				return false;
 			}
 

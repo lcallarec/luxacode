@@ -24,6 +24,13 @@ namespace Luxafor {
 			public RandomColor ();
 		}
 		[CCode (cheader_filename = "libluxafor.h")]
+		public class Raw : global::Luxafor.Effect.Effect, GLib.Object {
+			protected uint8 blue;
+			protected uint8[] bytes;
+			protected uint8 green;
+			public Raw (uint8[] bytes);
+		}
+		[CCode (cheader_filename = "libluxafor.h")]
 		public class Shutdown : global::Luxafor.Effect.Effect, GLib.Object {
 			public Shutdown ();
 		}

@@ -8,11 +8,12 @@ namespace Luxafor.Cli.Option {
 		
 		public abstract bool validate(string[] args);
 		
-		protected bool validate_8bits_inputs(...) {
-			var l = va_list();
+		protected bool validate_8bits_inputs(uint8 size, ...) {
+			
+			var list = va_list();
 
-			for (int i = 0; i <3; i++) {
-				int? _value = l.arg<int>();
+			for (int i = 0; i < size; i++) {
+				int? _value = list.arg<int>();
 				if (_value > 255 || _value < -1) {
 					return false;
 				}
