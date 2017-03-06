@@ -60,6 +60,17 @@ typedef struct _LuxaforEffectRaw LuxaforEffectRaw;
 typedef struct _LuxaforEffectRawClass LuxaforEffectRawClass;
 typedef struct _LuxaforEffectRawPrivate LuxaforEffectRawPrivate;
 
+#define LUXAFOR_EFFECT_TYPE_FADE_TO (luxafor_effect_fade_to_get_type ())
+#define LUXAFOR_EFFECT_FADE_TO(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), LUXAFOR_EFFECT_TYPE_FADE_TO, LuxaforEffectFadeTo))
+#define LUXAFOR_EFFECT_FADE_TO_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), LUXAFOR_EFFECT_TYPE_FADE_TO, LuxaforEffectFadeToClass))
+#define LUXAFOR_EFFECT_IS_FADE_TO(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), LUXAFOR_EFFECT_TYPE_FADE_TO))
+#define LUXAFOR_EFFECT_IS_FADE_TO_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), LUXAFOR_EFFECT_TYPE_FADE_TO))
+#define LUXAFOR_EFFECT_FADE_TO_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), LUXAFOR_EFFECT_TYPE_FADE_TO, LuxaforEffectFadeToClass))
+
+typedef struct _LuxaforEffectFadeTo LuxaforEffectFadeTo;
+typedef struct _LuxaforEffectFadeToClass LuxaforEffectFadeToClass;
+typedef struct _LuxaforEffectFadeToPrivate LuxaforEffectFadeToPrivate;
+
 #define LUXAFOR_EFFECT_TYPE_COLOR (luxafor_effect_color_get_type ())
 #define LUXAFOR_EFFECT_COLOR(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), LUXAFOR_EFFECT_TYPE_COLOR, LuxaforEffectColor))
 #define LUXAFOR_EFFECT_COLOR_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), LUXAFOR_EFFECT_TYPE_COLOR, LuxaforEffectColorClass))
@@ -151,12 +162,18 @@ struct _LuxaforEffectRawClass {
 	GObjectClass parent_class;
 };
 
+struct _LuxaforEffectFadeTo {
+	GObject parent_instance;
+	LuxaforEffectFadeToPrivate * priv;
+};
+
+struct _LuxaforEffectFadeToClass {
+	GObjectClass parent_class;
+};
+
 struct _LuxaforEffectColor {
 	GObject parent_instance;
 	LuxaforEffectColorPrivate * priv;
-	guint8 red;
-	guint8 green;
-	guint8 blue;
 };
 
 struct _LuxaforEffectColorClass {
@@ -207,9 +224,20 @@ void luxafor_effect_effect_handle (LuxaforEffectEffect* self, LuxaforLuxafor* lu
 GType luxafor_effect_raw_get_type (void) G_GNUC_CONST;
 LuxaforEffectRaw* luxafor_effect_raw_new (guint8* bytes, int bytes_length1);
 LuxaforEffectRaw* luxafor_effect_raw_construct (GType object_type, guint8* bytes, int bytes_length1);
+GType luxafor_effect_fade_to_get_type (void) G_GNUC_CONST;
 GType luxafor_effect_color_get_type (void) G_GNUC_CONST;
+LuxaforEffectFadeTo* luxafor_effect_fade_to_new (LuxaforEffectColor* color, guint8 speed);
+LuxaforEffectFadeTo* luxafor_effect_fade_to_construct (GType object_type, LuxaforEffectColor* color, guint8 speed);
+guint8 luxafor_effect_fade_to_get_speed (LuxaforEffectFadeTo* self);
+void luxafor_effect_fade_to_set_speed (LuxaforEffectFadeTo* self, guint8 value);
 LuxaforEffectColor* luxafor_effect_color_new (guint8 red, guint8 green, guint8 blue);
 LuxaforEffectColor* luxafor_effect_color_construct (GType object_type, guint8 red, guint8 green, guint8 blue);
+guint8 luxafor_effect_color_get_red (LuxaforEffectColor* self);
+void luxafor_effect_color_set_red (LuxaforEffectColor* self, guint8 value);
+guint8 luxafor_effect_color_get_green (LuxaforEffectColor* self);
+void luxafor_effect_color_set_green (LuxaforEffectColor* self, guint8 value);
+guint8 luxafor_effect_color_get_blue (LuxaforEffectColor* self);
+void luxafor_effect_color_set_blue (LuxaforEffectColor* self, guint8 value);
 GType luxafor_effect_shutdown_get_type (void) G_GNUC_CONST;
 LuxaforEffectShutdown* luxafor_effect_shutdown_new (void);
 LuxaforEffectShutdown* luxafor_effect_shutdown_construct (GType object_type);

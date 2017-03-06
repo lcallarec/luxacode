@@ -22,17 +22,6 @@ For execution, `su` access is needed to make libluxafor.so easily reachable at r
 $ sudo bash -c "export LD_LIBRARY_PATH=lib/ && ./luxafor-cli color --red=255"
 ```
 
-### Build from vala-libluxafor sources
-
-If you need to contribute, it may be easier to compile with vala-libluxafor source code instead of the shared library.
-
-In that case, symlink `lib/libluxafor` with the folder containing `vala-libluxafor` repository and run :
-
-```bash
-$ make
-$ sudo ./luxafor-cli color --red=255"
-```
-
 ## Usage
 
 Inline help :

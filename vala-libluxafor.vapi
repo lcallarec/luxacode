@@ -14,10 +14,15 @@ namespace Luxafor {
 	namespace Effect {
 		[CCode (cheader_filename = "libluxafor.h")]
 		public class Color : global::Luxafor.Effect.Effect, GLib.Object {
-			protected uint8 blue;
-			protected uint8 green;
-			protected uint8 red;
 			public Color (uint8 red, uint8 green, uint8 blue);
+			public uint8 blue { get; set construct; }
+			public uint8 green { get; set construct; }
+			public uint8 red { get; set construct; }
+		}
+		[CCode (cheader_filename = "libluxafor.h")]
+		public class FadeTo : global::Luxafor.Effect.Effect, GLib.Object {
+			public FadeTo (global::Luxafor.Effect.Color color, uint8 speed);
+			public uint8 speed { get; set construct; }
 		}
 		[CCode (cheader_filename = "libluxafor.h")]
 		public class RandomColor : global::Luxafor.Effect.Effect, GLib.Object {
