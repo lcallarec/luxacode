@@ -7,7 +7,7 @@ all: $(EXEC)
 compile:
 	-valac --pkg libusb-1.0 vala-libluxafor.vapi \
 		src/luxafor.vala src/option/register_stack.vala \
-		src/option/color.vala src/option/option.vala src/option/shutdown.vala src/option/random_color.vala src/option/raw.vala \
+		src/option/color.vala src/option/option.vala src/option/shutdown.vala src/option/random_color.vala src/option/raw.vala src/option/fade_to_color.vala \
 		-X libluxafor.so -X -I. \
 		-o luxafor-cli
 	-@chmod +x luxafor

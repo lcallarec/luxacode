@@ -1,17 +1,15 @@
 namespace Luxafor.Cli.Option {
 	
-	protected int red   = -1; 
-	protected int green = -1;
-	protected int blue  = -1;
+	private int speed = 127;
 		
-	public class Color : Option {
+	public class FadeToColor : Color {
 
 		public override string get_name() {
-			return "color";
+			return "fade-to-color";
 		}
 
 		public override Effect.Effect get_effect() {
-			return new Effect.Color((uint8) red, (uint8) green, (uint8) blue);
+			return new Effect.FadeToColor(new Effect.Color((uint8) red, (uint8) green, (uint8) blue), (uint8) speed);
 		}
 		
 		public override bool validate(string[] args) {
@@ -34,7 +32,7 @@ namespace Luxafor.Cli.Option {
 					arg_data = &green,
 					description = "Green layer [0-255]",
 					arg_description = null
-				}	,
+				},
 				OptionEntry() {
 					long_name = "blue",
 					short_name = 'b',
@@ -43,11 +41,20 @@ namespace Luxafor.Cli.Option {
 					arg_data = &blue,
 					description = "Blue layer [0-255]",
 					arg_description = null
+				},
+				OptionEntry() {
+					long_name = "speed",
+					short_name = 's',
+					flags = 0,
+					arg = OptionArg.INT,
+					arg_data = &speed,
+					description = "Speed [0-255], from the fastest to the slowest",
+					arg_description = null
 				}
 			};
 
 			try {
-				var opt_context = new OptionContext("- Color exemple");
+				var opt_context = new OptionContext("- FadeToColor exemple");
 				opt_context.set_help_enabled(true);
 				opt_context.add_main_entries(options, null);
 				opt_context.parse(ref args);
@@ -57,7 +64,7 @@ namespace Luxafor.Cli.Option {
 				return false;
 			}
 
-			if (false == this.validate_8bits_inputs(3, red, green, blue)) {
+			if (false == this.validate_8bits_inputs(4, red, green, blue, speed)) {
 				stderr.printf ("Error: arguments values must be an integer between 0 and 255.\n");
 				return false;
 			}

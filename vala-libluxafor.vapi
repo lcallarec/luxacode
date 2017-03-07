@@ -20,8 +20,8 @@ namespace Luxafor {
 			public uint8 red { get; set construct; }
 		}
 		[CCode (cheader_filename = "libluxafor.h")]
-		public class FadeTo : global::Luxafor.Effect.Effect, GLib.Object {
-			public FadeTo (global::Luxafor.Effect.Color color, uint8 speed);
+		public class FadeToColor : global::Luxafor.Effect.Effect, GLib.Object {
+			public FadeToColor (global::Luxafor.Effect.Color color, uint8 speed);
 			public uint8 speed { get; set construct; }
 		}
 		[CCode (cheader_filename = "libluxafor.h")]

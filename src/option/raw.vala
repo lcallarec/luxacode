@@ -99,7 +99,8 @@ namespace Luxafor.Cli.Option {
 			}
 
 			if (false == this.validate_8bits_inputs(7, a, b, c, d, e, f, g)) {
-				//return false;
+				stderr.printf ("Error: arguments values must be an integer between 0 and 255.\n");
+				return false;
 			}
 
 			if (a < 0 || b < 0 || c < 0 || d < 0 || e < 0 || f < 0 || g < 0) {

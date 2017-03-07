@@ -27,7 +27,7 @@ $ ./luxafor color --red=255"
 Inline help :
 
 ```bash
-$ sudo ./luxafor-cli --help
+$ ./luxafor --help
 ```
 
 ### Features
@@ -35,8 +35,11 @@ $ sudo ./luxafor-cli --help
 #### Changing Luxafor color
 
 ```bash
-# Will activate an intense red color.
-$ sudo ./luxafor-cli color --intensity=255 --red=255 --green=0 --blue=0
+# Will activate a pure red color.
+$ ./luxafor color --red=255 --green=0 --blue=0
+
+# Short syntax
+$ ./luxafor color -r 255 -g 0 -b 0
 ```
 
 Default values :
@@ -46,19 +49,42 @@ Default values :
 --blue=0
 ```
 
+At least one color channel must be set.
+
 #### Shutdown the Luxafor
 
 ```bash
 # Shutdown the Luxafor
-$ sudo ./luxafor-cli shutdown
+$ ./luxafor shutdown
 ```
 
 #### Random color
 
 ```bash
 # Randomly change color
-$ sudo ./luxafor-cli random-color
+$ /luxafor random-color
 ```
+
+#### Fade to color
+
+```bash
+# Fade to the given color (here, yellow), from the current Luxafor color.
+#Default speed is 127 "medium", but you can specify a value between 0 (fastest) to 255 (slowest)
+$ ./luxafor fade-to-color --red=255 --green=127 --speed=255
+
+# Short syntax
+$ ./luxafor fade-to-color -r 255 -g 127
+```
+
+Default values :
+```
+--speed=127
+--red=0
+--green=0
+--blue=0
+```
+
+At least one color channel must be set.
 
 #### More features ?
 
