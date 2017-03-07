@@ -33,6 +33,5 @@
 *.su
 
 # Project
-
-lib/libluxafor.h
 luxafor-cli
+

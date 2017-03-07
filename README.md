@@ -19,7 +19,7 @@ Execute :
 For execution, `su` access is needed to make libluxafor.so easily reachable at runtime and allow luxafor-cli to access USB devices in a one-line command. (accessing USB devices is always disabled by default for 'non-root' user on every Linux distributions).
 
 ```bash
-$ sudo bash -c "export LD_LIBRARY_PATH=lib/ && ./luxafor-cli color --red=255"
+$ ./luxafor color --red=255"
 ```
 
 ## Usage
