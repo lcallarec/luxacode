@@ -1,3 +1,6 @@
+/**
+ * @author Laurent Callarec <l.callarec@gmail.com>
+ */
 namespace Luxafor.Cli.Option {
 	
 	private int a = -1; 
