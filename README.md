@@ -67,6 +67,15 @@ luxafor.send(new Luxafor.Effect.RandomColor());
 luxafor.send(new Luxafor.Effect.Raw((uint8) 1, (uint8) 255, (uint8) 255, (uint8) 0, (uint8) 0, (uint8) 0, (uint8) 0));
 ```
 
+### Fade to a color :
+```
+# Fade curent color
+luxafor.send(new Effect.FadeTo(new Effect.Color((uint8) red [0-255], (uint8) green [0-255], (uint8) blue [0-255]), (uint8) speed [0-255]#0:fast,255:slow#));
+
+# For exemple : fade curent color to a pure blue, very slowly :
+luxafor.send(new Effect.FadeTo(new Effect.Color((uint8) 0, (uint8)  0, (uint8) 255), (uint8) 255));
+```
+
 ### Shutdown the Luxafor :
 ```
 luxafor.send(new Luxafor.Effect.Shutdown());
@@ -74,6 +83,4 @@ luxafor.send(new Luxafor.Effect.Shutdown());
 
 ## Contribute
 
-There's not so many effects, for now. But feel free to contribute quicker and better than I can :p
-
-Any contributions are welcome, don't be shy !
+Feel free to contribute quicker and better than I can :p Any contributions are welcome, don't be shy !

@@ -45,8 +45,18 @@ public static int main(string[] args)
 
 		stdout.printf("Red color using raw effect\n");
 		luxafor.send(new Effect.Raw({1, 255, 255, 0, 0, 0, 0}));
-		
+
 		Thread.usleep(1000000);
+		
+		stdout.printf("Fade to yellow, very slowly\n");
+		luxafor.send(new Effect.FadeToColor(new Effect.Color(255, 127, 0), 255));
+		
+		Thread.usleep(5000000);
+
+		stdout.printf("Fade to blue, medium spedd\n");
+		luxafor.send(new Effect.FadeToColor(new Effect.Color(0, 0, 255), 64));
+		
+		Thread.usleep(5000000);
 		
 		stdout.printf("Shutdown the device\n");
 		luxafor.send(new Effect.Shutdown());
