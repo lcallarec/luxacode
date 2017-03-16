@@ -7,8 +7,7 @@ all: $(EXEC)
 so:
 	-rm -rf vala-libluxafor.vapi 
 	-valac --pkg libusb-1.0 --library=vala-libluxafor -H libluxafor.h \
-		src/error.vala src/luxafor.vala src/device/usb_device_finder.vala src/device/luxafor_finder.vala src/device/error.vala \
-		src/effect/effect.vala src/effect/raw.vala src/effect/fade_to_color.vala src/effect/color.vala src/effect/shutdown.vala src/effect/random_color.vala src/effect/error.vala \
+		$$(find src/ -type f -name "*.vala") 
 		-X -fPIC -X -shared \
 		-o libluxafor.so
 
