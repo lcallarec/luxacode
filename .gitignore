@@ -1,4 +1,4 @@
-# Object files
+#Object files
 *.o
 *.ko
 *.obj
@@ -36,3 +36,6 @@
 test-cli
 libluxafor.h
 vala-libluxafor.vapi
+# Project
+luxafor-cli
+
