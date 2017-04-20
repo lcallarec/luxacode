@@ -1,4 +1,4 @@
-namespace Luxafor.Device {
+namespace Luxacode.Device.Finder {
 
 	/**
 	 * @author Laurent Callarec <l.callarec@gmail.com>
@@ -44,7 +44,7 @@ namespace Luxafor.Device {
 				i++;
 			}
 
-			throw new DeviceError.DEVICE_NOT_FOUND("Luxafor USB Device with vendorID=%04x and productIR=%04x wasn't found.".printf(LUXAFOR_VID, LUXAFOR_PID));
+			throw new DeviceError.DEVICE_NOT_FOUND("Luxafor USB Device with vendorID=%04x and productID=%04x wasn't found.".printf(LUXAFOR_VID, LUXAFOR_PID));
 		}
 	}
 }

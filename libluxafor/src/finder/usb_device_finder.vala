@@ -1,4 +1,4 @@
-namespace Luxafor.Device {
+namespace Luxacode.Device.Finder {
 
 	/**
 	 * @author Laurent Callarec <l.callarec@gmail.com>
