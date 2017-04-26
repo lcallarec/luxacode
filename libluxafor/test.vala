@@ -1,5 +1,5 @@
 /*
- * vala-luxafor.vala
+ * test.vala
  * 
  * Copyright 2017 laurent <laurent@linux>
  * 

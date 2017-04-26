@@ -28,9 +28,9 @@ The `luxafor-cli` is mainy used to execute functionnal test from the command-lin
 `su` is needed to allow `luxafor-cli` to access USB devices.
 
 ```bash
-$ make ftest
+$ make libluxafor-so-test 
 $ sudo su -
-$ export LD_LIBRARY_PATH=. && ./luxafor-cli
+$ export LD_LIBRARY_PATH=. && ./test-cli
 
 ```
 
@@ -44,7 +44,7 @@ LibUSB.Context.init(out context);
 
 ### Create and send a Luxafor command
 ```vala
-Luxafor.Luxafor luxafor = new Luxafor.Luxafor(context);
+using global::Luxacode.Device;
 try {
 	Luxafor luxafor = new Luxafor(context);
 	luxafor.send(new Effect.Color((uint8) red, (uint8) green, (uint8) blue););	
@@ -64,12 +64,14 @@ luxafor.send(new Luxafor.Effect.RandomColor());
 * This effect is used to send user-defined raw bytes to the Luxafor USB device.
 * Send raw data - if you don't know what you are doing - may need a device restart (plug / unplug) is something goes wrong on the Luxafor side
 ```
-luxafor.send(new Luxafor.Effect.Raw((uint8) 1, (uint8) 255, (uint8) 255, (uint8) 0, (uint8) 0, (uint8) 0, (uint8) 0));
+using global::Luxacode.Device;
+luxafor.send(new Effect.Raw((uint8) 1, (uint8) 255, (uint8) 255, (uint8) 0, (uint8) 0, (uint8) 0, (uint8) 0));
 ```
 
 ### Fade to a color :
 ```
 # Fade curent color
+using global::Luxacode.Device;
 luxafor.send(new Effect.FadeTo(new Effect.Color((uint8) red [0-255], (uint8) green [0-255], (uint8) blue [0-255]), (uint8) speed [0-255]#0:fast,255:slow#));
 
 # For exemple : fade curent color to a pure blue, very slowly :
@@ -78,7 +80,8 @@ luxafor.send(new Effect.FadeTo(new Effect.Color((uint8) 0, (uint8)  0, (uint8) 2
 
 ### Shutdown the Luxafor :
 ```
-luxafor.send(new Luxafor.Effect.Shutdown());
+using global::Luxacode.Device;
+luxafor.send(new Effect.Shutdown());
 ```
 
 ## Contribute
