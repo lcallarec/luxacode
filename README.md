@@ -7,8 +7,8 @@ It uses [Vala](https://wiki.gnome.org/Projects/Vala) as main programing language
 
 ## Tools
 
-* **Libluxafor** is a library. It provides a low-level access to **Luxafor** device.
-* **Luxafor-cli** is a high-level command-line tool that aims to command your **Luxafor** device.
+* [Libluxafor](#luxafor-cli)Libluxafor** is a library. It provides a low-level access to **Luxafor** device.
+* [Luxafor-cli](#libLuxafor)is a high-level command-line tool that aims to command your **Luxafor** device.
 
 # Luxafor-cli
 
@@ -98,10 +98,9 @@ Default values :
 
 At least one color channel must be set.
 
-# Vala-LibLuxafor
+# Libluxafor
 
-Vala-LibLuxafor library will give you control over Luxafor devices.
-It is written in Vala, and designed to be compiled as shared library.
+Libluxafor is a library written in Vala which exposes an API to give you access to Luxafor devices.
 
 ## Build the shared library
 
@@ -121,7 +120,6 @@ $ make libluxafor-so-create
 ```
 
 ### Functionnal tests w/ Luxafor-cli sandbox :
-
 
 The `test-cli` is mainy used to execute functionnal test from the command-line. It is compiled against the libluxafor shared object.
 
