@@ -1,7 +1,9 @@
 /**
  * @author Laurent Callarec <l.callarec@gmail.com>
  */
-namespace Luxafor.Cli.Option {
+namespace Luxacode.Cli.Option {
+	
+	using global::Luxacode.Device.Effect;
 	
 	public class Shutdown : Option {
 
@@ -9,8 +11,8 @@ namespace Luxafor.Cli.Option {
 			return "shutdown";
 		}
 
-		public override Effect.Effect get_effect() {
-			return new Effect.Shutdown();
+		public override Luxacode.Device.Effect.Effect get_effect() {
+			return new Luxacode.Device.Effect.Shutdown();
 		}
 		
 		public override bool validate(string[] args) {

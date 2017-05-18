@@ -53,7 +53,7 @@ public static int main(string[] args)
 		
 		Thread.usleep(5000000);
 
-		stdout.printf("Fade to blue, medium spedd\n");
+		stdout.printf("Fade to blue, medium speed\n");
 		luxafor.send(new Effect.FadeToColor(new Effect.Color(0, 0, 255), 64));
 		
 		Thread.usleep(5000000);

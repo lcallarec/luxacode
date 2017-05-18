@@ -1,11 +1,13 @@
 /**
  * @author Laurent Callarec <l.callarec@gmail.com>
  */
-namespace Luxafor.Cli {
+namespace Luxacode.Cli {
+
+	using global::Luxacode;
+	using global::Luxacode.Device;	
+	using global::Luxacode.Device.Effect;	
 	
-	using global::Luxafor;
-	
-	public class LuxaforCli : Object {
+	public class Cli : Object {
 
 		private static Option.RegisterStack register_stack;
 
@@ -27,7 +29,7 @@ namespace Luxafor.Cli {
 
 			try {
 				Luxafor luxafor = new Luxafor(context);
-				Effect.Effect? effect = register_stack.get_effect_for(args[1]);
+				Luxacode.Device.Effect.Effect? effect = register_stack.get_effect_for(args[1]);
 				if (effect != null) {
 					luxafor.send(effect);	
 				}

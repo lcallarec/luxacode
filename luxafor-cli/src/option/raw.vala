@@ -1,25 +1,26 @@
 /**
  * @author Laurent Callarec <l.callarec@gmail.com>
  */
-namespace Luxafor.Cli.Option {
+namespace Luxacode.Cli.Option {
 	
-	private int a = -1; 
-	private int b = -1;
-	private int c = -1;
-	private int d = -1;
-	private int e = -1;
-	private int f = -1;
-	private int g = -1;
-	
+	using global::Luxacode.Device.Effect;
 		
 	public class Raw : Option {
+
+		private int a = -1; 
+		private int b = -1;
+		private int c = -1;
+		private int d = -1;
+		private int e = -1;
+		private int f = -1;
+		private int g = -1;
 
 		public override string get_name() {
 			return "raw";
 		}
 
-		public override Effect.Effect get_effect() {
-			return new Effect.Raw({(uint8) a, (uint8) b, (uint8) c, (uint8) d, (uint8) e, (uint8) f, (uint8) g});
+		public override Luxacode.Device.Effect.Effect get_effect() {
+			return new Luxacode.Device.Effect.Raw({(uint8) a, (uint8) b, (uint8) c, (uint8) d, (uint8) e, (uint8) f, (uint8) g});
 		}
 		
 		public override bool validate(string[] args) {

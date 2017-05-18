@@ -1,13 +1,15 @@
 /**
  * @author Laurent Callarec <l.callarec@gmail.com>
  */
-namespace Luxafor.Cli.Option {
-	
+namespace Luxacode.Cli.Option {
+
+	using global::Luxacode.Device.Effect;
+
 	public abstract class Option : Object {
 		
 		public abstract string get_name();
 
-		public abstract Effect.Effect get_effect();
+		public abstract Luxacode.Device.Effect.Effect get_effect();
 		
 		public abstract bool validate(string[] args);
 		

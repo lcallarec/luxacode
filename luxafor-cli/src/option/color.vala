@@ -1,20 +1,22 @@
 /**
  * @author Laurent Callarec <l.callarec@gmail.com>
  */
-namespace Luxafor.Cli.Option {
-	
-	protected int red   = -1; 
-	protected int green = -1;
-	protected int blue  = -1;
+namespace Luxacode.Cli.Option {
+
+	using global::Luxacode.Device.Effect;
 		
 	public class Color : Option {
+
+		protected int red   = -1; 
+		protected int green = -1;
+		protected int blue  = -1;
 
 		public override string get_name() {
 			return "color";
 		}
 
-		public override Effect.Effect get_effect() {
-			return new Effect.Color((uint8) red, (uint8) green, (uint8) blue);
+		public override Luxacode.Device.Effect.Effect get_effect() {
+			return new Luxacode.Device.Effect.Color((uint8) red, (uint8) green, (uint8) blue);
 		}
 		
 		public override bool validate(string[] args) {
@@ -66,7 +68,7 @@ namespace Luxafor.Cli.Option {
 			}
 
 			if (red < 0 && green < 0 && blue < 0) {
-				stderr.printf("You must at least set one color : --red=[0-255], --green[0-255] or --blue[0-255] (-r [0-255], -g [0-255] -b [0-255]).\n");
+				stderr.printf("You must at least set one color : --red=[0-255], --green=[0-255] or --blue=[0-255] (-r [0-255], -g [0-255] -b [0-255]).\n");
 				return false;
 			}
 			

@@ -1,18 +1,20 @@
 /**
  * @author Laurent Callarec <l.callarec@gmail.com>
  */
-namespace Luxafor.Cli.Option {
-	
-	private int speed = 127;
-		
-	public class FadeToColor : Color {
+namespace Luxacode.Cli.Option {
 
+	using global::Luxacode.Device.Effect;
+			
+	public class FadeToColor : Color {
+		
+		private int speed = 127;
+		
 		public override string get_name() {
 			return "fade-to-color";
 		}
 
-		public override Effect.Effect get_effect() {
-			return new Effect.FadeToColor(new Effect.Color((uint8) red, (uint8) green, (uint8) blue), (uint8) speed);
+		public override Luxacode.Device.Effect.Effect get_effect() {
+			return new Luxacode.Device.Effect.FadeToColor(new Luxacode.Device.Effect.Color((uint8) red, (uint8) green, (uint8) blue), (uint8) speed);
 		}
 		
 		public override bool validate(string[] args) {

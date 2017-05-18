@@ -1,9 +1,9 @@
 /**
  * @author Laurent Callarec <l.callarec@gmail.com>
  */
-namespace Luxafor.Cli.Option {
+namespace Luxacode.Cli.Option {
 	
-	using global::Luxafor.Effect;
+	using global::Luxacode.Device.Effect;
 	
 	private Option[] options;
 	
@@ -21,7 +21,7 @@ namespace Luxafor.Cli.Option {
 			return null != find_option_from_name(name);
 		}
 		
-		public Effect.Effect? get_effect_for(string name) {
+		public Luxacode.Device.Effect.Effect? get_effect_for(string name) {
 			
 			Option? option = find_option_from_name(name);
 			if (option != null) {
