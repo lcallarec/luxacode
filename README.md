@@ -7,8 +7,8 @@ It uses [Vala](https://wiki.gnome.org/Projects/Vala) as main programing language
 
 ## Tools
 
-* [Libluxafor](#luxafor-cli)Libluxafor** is a library. It provides a low-level access to **Luxafor** device.
-* [Luxafor-cli](#libLuxafor)is a high-level command-line tool that aims to command your **Luxafor** device.
+* [Libluxafor](#luxafor-cli) is a Vala library which provides a low-level API to access a **Luxafor** device.
+* [Luxafor-cli](#libLuxafor) is a high-level command-line tool that aims to command your **Luxafor** device.
 
 # Luxafor-cli
 
