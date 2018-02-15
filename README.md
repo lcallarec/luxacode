@@ -18,7 +18,7 @@ Luxafor-cli is a command line tool written in Vala to control over your Luxafor 
 
 Make sure vala and libusb-dev are installed :
 ```bash
-sudo apt-get install vala libusb-1.0-0 libusb-1.0-0-dev libusb-dev
+sudo apt-get install valac libusb-1.0-0 libusb-1.0-0-dev libusb-dev
 ```
 
 Compile :
