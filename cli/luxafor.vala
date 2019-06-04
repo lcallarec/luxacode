@@ -1,13 +1,10 @@
-/**
- * @author Laurent Callarec <l.callarec@gmail.com>
- */
-namespace Luxacode.Cli {
+using Luxacode;
+using Luxacode.Device;	
+using Luxacode.Device.Effect;	
 
-	using global::Luxacode;
-	using global::Luxacode.Device;	
-	using global::Luxacode.Device.Effect;	
-	
-	public class Cli : Object {
+namespace Luxacode.Cli {
+		
+	public class App : Object {
 
 		private static Option.RegisterStack register_stack;
 
