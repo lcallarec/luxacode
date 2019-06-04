@@ -6,17 +6,17 @@ namespace Luxacode.Cli {
 		
 	public class App : Object {
 
-		private static Command.Commands commands = new Command.Commands();
+		private static Command.Commands commands;
 
 		public static int main (string[] args) {
-			
+			commands = new Command.Commands();
 			commands.register(new Command.Color());
 			commands.register(new Command.Shutdown());
 			commands.register(new Command.RandomColor());
 			commands.register(new Command.Raw());
 			commands.register(new Command.FadeToColor());
 			
-			if (false == validate(args, commands)) {
+			if (false == validate(args)) {
 				return 2;
 			}
 			
@@ -40,7 +40,7 @@ namespace Luxacode.Cli {
 			return 0;
 		}
 		
-		private static bool validate(string[] args, Command.Commands commands) {
+		private static bool validate(string[] args) {
 			
 			if(args[1] == null) {
 				stderr.printf("Please try a valid command :\n");
