@@ -32,10 +32,5 @@
 *.dSYM/
 *.su
 
-# Project scope
-test-cli
-libluxafor.h
-vala-libluxafor.vapi
-# Project
-luxafor-cli
-
+# Build
+build

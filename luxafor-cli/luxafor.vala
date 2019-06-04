@@ -69,11 +69,11 @@ namespace Luxacode.Cli {
 		}
 		
 		private static void output_commands_help() {
-			stdout.printf("luxafor-cli color [--help]\n");
-			stdout.printf("luxafor-cli shutdown \n");			
-			stdout.printf("luxafor-cli random-color \n");
-			stdout.printf("luxafor-cli raw [--help]\n");
-			stdout.printf("luxafor-cli fade-to-color [--help]\n");			
+			stdout.printf("luxafor color [--help]\n");
+			stdout.printf("luxafor shutdown \n");			
+			stdout.printf("luxafor random-color \n");
+			stdout.printf("luxafor raw [--help]\n");
+			stdout.printf("luxafor fade-to-color [--help]\n");			
 		}
 	}
 }
