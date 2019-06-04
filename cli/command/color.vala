@@ -1,11 +1,8 @@
-/**
- * @author Laurent Callarec <l.callarec@gmail.com>
- */
-namespace Luxacode.Cli.Option {
+using Luxacode.Device.Effect;
+namespace Luxacode.Cli.Command {
 
-	using global::Luxacode.Device.Effect;
 		
-	public class Color : Option {
+	public class Color : Command {
 
 		protected int red   = -1; 
 		protected int green = -1;

@@ -23,13 +23,13 @@ lib_sources = files(
 
 cli_sources = files(
     'cli/luxafor.vala',
-    'cli/option/color.vala',
-    'cli/option/fade_to_color.vala',
-    'cli/option/option.vala',
-    'cli/option/random_color.vala',
-    'cli/option/raw.vala',
-    'cli/option/register_stack.vala',
-    'cli/option/shutdown.vala'
+    'cli/command/color.vala',
+    'cli/command/fade_to_color.vala',
+    'cli/command/command.vala',
+    'cli/command/random_color.vala',
+    'cli/command/raw.vala',
+    'cli/command/commands.vala',
+    'cli/command/shutdown.vala'
 )
 
 libluxafor = shared_library('luxafor', lib_sources, dependencies: deps)

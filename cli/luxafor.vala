@@ -6,18 +6,17 @@ namespace Luxacode.Cli {
 		
 	public class App : Object {
 
-		private static Option.RegisterStack register_stack;
+		private static Command.Commands commands = new Command.Commands();
 
 		public static int main (string[] args) {
 			
-			register_stack = new Option.RegisterStack();
-			register_stack.register(new Option.Color());
-			register_stack.register(new Option.Shutdown());
-			register_stack.register(new Option.RandomColor());
-			register_stack.register(new Option.Raw());
-			register_stack.register(new Option.FadeToColor());
+			commands.register(new Command.Color());
+			commands.register(new Command.Shutdown());
+			commands.register(new Command.RandomColor());
+			commands.register(new Command.Raw());
+			commands.register(new Command.FadeToColor());
 			
-			if (false == validate(args, register_stack)) {
+			if (false == validate(args, commands)) {
 				return 2;
 			}
 			
@@ -26,7 +25,7 @@ namespace Luxacode.Cli {
 
 			try {
 				Luxafor luxafor = new Luxafor(context);
-				Luxacode.Device.Effect.Effect? effect = register_stack.get_effect_for(args[1]);
+				Luxacode.Device.Effect.Effect? effect = commands.get_effect_for(args[1]);
 				if (effect != null) {
 					luxafor.send(effect);	
 				}
@@ -41,7 +40,7 @@ namespace Luxacode.Cli {
 			return 0;
 		}
 		
-		private static bool validate(string[] args, Option.RegisterStack register_stack) {
+		private static bool validate(string[] args, Command.Commands commands) {
 			
 			if(args[1] == null) {
 				stderr.printf("Please try a valid command :\n");
@@ -56,13 +55,13 @@ namespace Luxacode.Cli {
 			}
 
 			
-			if (false == register_stack.can_handle(args[1])) {
+			if (false == commands.is_registered(args[1])) {
 				stderr.printf("\"%s\" is not a known command. Please try a valid command :\n", args[1]);
 				output_commands_help();
 				return false;
 			}
 			
-			return register_stack.validate(args[1], args);
+			return commands.validate(args[1], args);
 		}
 		
 		private static void output_commands_help() {

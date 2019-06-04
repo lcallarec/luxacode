@@ -1,11 +1,8 @@
-/**
- * @author Laurent Callarec <l.callarec@gmail.com>
- */
-namespace Luxacode.Cli.Option {
-	
-	using global::Luxacode.Device.Effect;
-	
-	public class Shutdown : Option {
+using Luxacode.Device.Effect;
+
+namespace Luxacode.Cli.Command {
+
+	public class Shutdown : Command {
 
 		public override string get_name() {
 			return "shutdown";

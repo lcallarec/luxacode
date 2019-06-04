@@ -1,9 +1,6 @@
-/**
- * @author Laurent Callarec <l.callarec@gmail.com>
- */
-namespace Luxacode.Cli.Option {
+using Luxacode.Device.Effect;
 
-	using global::Luxacode.Device.Effect;
+namespace Luxacode.Cli.Command {
 			
 	public class FadeToColor : Color {
 		

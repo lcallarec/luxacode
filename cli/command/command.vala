@@ -1,11 +1,9 @@
-/**
- * @author Laurent Callarec <l.callarec@gmail.com>
- */
-namespace Luxacode.Cli.Option {
+using Luxacode.Device.Effect;
 
-	using global::Luxacode.Device.Effect;
+namespace Luxacode.Cli.Command {
 
-	public abstract class Option : Object {
+
+	public abstract class Command : Object {
 		
 		public abstract string get_name();
 

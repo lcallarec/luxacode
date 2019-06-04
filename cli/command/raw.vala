@@ -1,11 +1,8 @@
-/**
- * @author Laurent Callarec <l.callarec@gmail.com>
- */
-namespace Luxacode.Cli.Option {
-	
-	using global::Luxacode.Device.Effect;
-		
-	public class Raw : Option {
+using Luxacode.Device.Effect;
+
+namespace Luxacode.Cli.Command {
+			
+	public class Raw : Command {
 
 		private int a = -1; 
 		private int b = -1;
