@@ -34,10 +34,10 @@ $ sudo ./build/luxafor"
 
 ## Features
 
-* changing color
+* change color
 * shutdown
 * random color
-* fade to color (at at given speed)
+* fade to color (at a given speed)
 
 ## Contribute
 
