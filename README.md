@@ -26,7 +26,7 @@ Both luxafor executable and libluxafor.so are created in `build` dir.
 
 ## Run
 
-`luxafor` still needs root permissions to access an USB devices.
+`luxafor` needs root permissions to write to an USB device.
 
 ```bash
 $ sudo ./build/luxafor"
